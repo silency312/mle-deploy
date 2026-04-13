@@ -1,6 +1,7 @@
 """Класс FastApiHandler, который обрабатывает запросы API."""
 
 from catboost import CatBoostClassifier
+import os
 
 class FastApiHandler:
     """Класс FastApiHandler, который обрабатывает запрос и возвращает предсказание."""
@@ -13,8 +14,7 @@ class FastApiHandler:
             "user_id": str,
             "model_params": dict
         }
-
-        self.model_path = "/home/mle-user/mle_projects/mle-sprint3/models/catboost_churn_model.bin"
+        self.model_path = os.path.join("models", "catboost_churn_model.bin")
         self.load_churn_model(model_path=self.model_path)
         
         # необходимые параметры для предсказаний модели оттока
