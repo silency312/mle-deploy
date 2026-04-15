@@ -1,0 +1,18 @@
+services:
+  churn-app:
+ 
+    env_file:
+      - ./.env
+    
+    build:
+      dockerfile: Dockerfile
+    
+    ports:
+      - "${APP_VM_PORT}:${APP_DOCKER_PORT}"
+
+    volumes:
+      - type: bind
+        # директория на ВМ
+        source: ./models
+        # директория в контейнере
+        target: /churn_app/models

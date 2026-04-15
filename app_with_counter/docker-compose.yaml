@@ -1,0 +1,43 @@
+services:
+  # название сервиса 
+  main-app:  
+    # указываем путь к .env файлу с переменными окружения
+    env_file:
+      - ./.env
+    
+    # собираем образ помощью Dockerfile
+    build:
+      dockerfile: Dockerfile_main
+
+    volumes:
+        # тип тома
+      - type: bind
+        # директория на ВМ
+        source: ./speeches
+        # директория в контейнере
+        target: /app_with_counter/speeches
+
+    # перенаправляем порты
+    # используем переменные из .env файла
+    ports:
+      - "${MAIN_APP_PORT_VM}:${MAIN_APP_PORT}"
+    
+
+  # название сервиса 
+  counter-app:
+    # указываем путь к .env файлу с переменными окружения
+    env_file:
+      - ./.env
+    
+    # собираем образ с помощью Dockerfile
+    build:
+      dockerfile: Dockerfile_counter
+
+    hostname: counter
+
+    # перенаправляем порты
+    # используем переменные из .env файла
+    ports:
+      - "${COUNTER_APP_PORT_VM}:${COUNTER_APP_PORT}"
+    
+    

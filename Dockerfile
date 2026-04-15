@@ -15,11 +15,11 @@ WORKDIR churn_app
 RUN pip3 install -r requirements.txt
 # инструкция для установки библиотек
 
-EXPOSE ${APP_PORT}
+EXPOSE ${APP_DOCKER_PORT}
 # инструкция для открытия порта
 # используйте порт, который указан в Readme
 
 VOLUME /models
 # примонтируйте том с моделями
 
-CMD uvicorn app.churn_app:app --reload --port ${APP_PORT} --host 0.0.0.0
+CMD uvicorn app.churn_app:app --reload --port ${APP_DOCKER_PORT} --host 0.0.0.0
